@@ -1,0 +1,28 @@
+REFS (T,	A,	I,	C,	S#,	R,	S,	E,	V,	N,	PI,	PF,	Y,	M).	
+
+
+D = {
+    S → S#,R,E
+    S#	→	S
+    S,	V,	N	→	Y,	M 
+    S,	V,	N,	PI	→	T,	PF
+    A	→	I,	C	
+    }
+
+
+
+a)Será  que X= S# V N A éuma chave para REFS?	Justifique
+
+Não pois para ser uma key  de REFS X* teria que conter todos os atributos de REFS e neste caso nao tem
+
+X* = {S# V N A, Y,M  ,R , E , S ,I, C}
+Nao contem o PI nem o T nem o PF logo nao é key  de REFS
+
+
+b) Obtenha	uma	decomposição	de	REFS que	esteja	na	Terceira	Forma	Normal,	com	
+preservação	das	dependências.
+
+A decomposiçao de boyce codd apesar de ser uma lossless decomposition pode resultar na perda de dependencias funcionais
+enquanto que a decomposition na third normal form é lossless e preserva as dependencia funcionais mas tem algumas anomalias
+
+
