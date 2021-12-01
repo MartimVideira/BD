@@ -1,0 +1,84 @@
+SQl
+
+Stands for Structured Query Language
+
+Data Definition Language (DDl)
+    . Define relational schemata
+    . Create alter delete tables and their attributes
+
+Data Manipulation language (Dml)
+    .   Inser delete modify tuples in tables
+    . Query one or more tables
+
+Relations in SQL 
+Tables: normal type of realtion exists in the database and can be modified as well as queried
+
+Views : Relations defined by  computation not stored and are construvted when needed
+
+Temporary tables : constructed on the run and are not stored
+
+Data Types in Sql 
+
+CHAR(n) Stores fixed length string of up to n characters
+
+VARCHAR(n) Stores variable-length string of up to n characters
+
+INt 
+SHORT INT 
+FLOAT
+DECIMAL(n ,d)
+
+BOOLEAN TRUE FALSE UNKNOWN
+
+DATE /TIMES
+
+NULL
+TEXT 
+BLOB large files or large objects are stored as blobs
+
+Type Affinities in Sqlite
+eache column has a type affinity which means it stores one type
+and it tries to convert the inserted data type into the correct one
+
+
+TABLE DECLARATIONS
+
+CREATE TABLE <table_name> (
+    <column_name> <data_type>,
+    <column_name> <data_type>,
+    <column_name> <data_type>,
+    ....
+    <column_name> <data_type>,
+);
+
+Exemple:
+CREATE TABLE MovieStar (
+    id INTEGER,
+    name CHAR(30),
+    address VARCHAR(255),
+    gnder CHAR(1),
+    birthdate DATE   
+);
+
+basically beacause ofg the type affinity i can insert the data in another type and
+it will convert it into the correct one.
+
+MODIFYING RELATION SCHEMAS
+
+To remove an entire table and all its tuples:
+DROP TABLE <table_name>;
+
+To modify the schema of an existing relationa
+#Adding another column
+ALTER TABLE <tablew_name> ADD <column_name> <data_type>;
+#Removing an existing column
+ALTER TABLE <table_name> DROP <column_name>;
+
+Default values 
+CREATE TABLE <table_name> (
+    <column_name> <column_type> DEFAULT <default_value>
+    ....
+)
+
+ALTER TABLE <table_name> ADD <column_name> <column_type> DEFAULT <value>;
+#this will populate  table missing values with the specified value.
