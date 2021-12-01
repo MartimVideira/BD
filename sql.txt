@@ -82,3 +82,94 @@ CREATE TABLE <table_name> (
 
 ALTER TABLE <table_name> ADD <column_name> <column_type> DEFAULT <value>;
 #this will populate  table missing values with the specified value.
+
+
+----------------------------------------------------------------------
+Integrity -> Constraints
+
+.Data entry errors (inserts)
+Correctness criteria (update)
+Enforce consistency 
+Tell system about data - store query processing
+
+Classification of Constraints
+Non-Null Constraints
+Key Constraints
+Attribute-based and tuple based Constraints
+referential integrity (foreign key)
+General assertions
+
+create table <table_name> (
+    <column_name> <data_type> NOT NULL,
+    ...
+);
+Primary key is a constraint that obligates an attribute to be not null and to be unique
+create table <table_name> (
+    <column_name> <data_type> PRIMARY KEY,
+    ...
+);
+#autoincrement is a nice thing to add to an id
+#Composed primary key
+create table <table_name> (
+
+    <column_name> <data_type>,
+    <column_name> <data_type>,
+    PRIMARY KEY(<column_name>,column_name>)
+);
+insert into <table_name> (<column_name>,<column_name>,<column_name>) values (value, value,value);
+
+
+ROWID in SQLITE as a default value for a row id 
+update table_name set column_name = value where ROWID = 2;
+
+Unique values values that are unique and are not keys but can be null
+create <table_name> (
+    <column_name> <column_type> unique
+);
+CREATE TABLE MovieStar (
+id INTEGER PRIMARY KEY,
+name CHAR(30),
+address VARCHAR(255) UNIQUE,
+gender CHAR(1) DEFAULT ‘?’,
+birthdate DATE,
+phone CHAR(16) UNIQUE
+);
+we can have several attr bein unique like so:
+#the combination of them must be unique between tuples
+create <table_name> (
+    <column_name> <column_type> 
+    <column_name> <column_type> 
+    <column_name> <column_type> 
+    Unique(attr1, attr2);
+    UNIQUE(attr1,attr3);
+);
+CREATE TABLE MovieStar (
+id INTEGER PRIMARY KEY,
+name CHAR(30),
+address VARCHAR(255),
+gender CHAR(1) DEFAULT ‘?’,
+birthdate DATE,
+UNIQUE (name, birthdate),
+UNIQUE (name, address)
+);
+
+CHECK PER COLLUMN:
+collumn_name collumn_type CHECK(condition)
+CREATE TABLE Student (
+sID INTEGER PRIMARY KEY,
+sName TEXT,
+GPA REAL CHECK (GPA<=4.0 and GPA>0.0),
+sizeHS INTEGER CHECK (sizeHS < 5000),
+);
+
+CHECK  PER TUPPLE:
+CHECK(condition)
+CREATE TABLE Apply (
+sID INTEGER,
+cName TEXT,
+major TEXT,
+decision TEXT,
+PRIMARY KEY (sID, cName, major),
+CHECK (decision=‘N’ or cName <>’Stanford’ or major <>’CS’)
+);
+
