@@ -1,0 +1,18 @@
+-- 1) SELECT Aluno.nr as Numero FROM Aluno; 
+
+-- 2) SELECT Cadeira.cod, Cadeira.design FROM  CadeiraWHERECadeira.curso=AC';
+
+-- 3) SELECT NomesIguais.Nome FROM  Aluno as NomesIguais , Prof   WHERE NomesIguais.Nome = Prof.Nome;
+
+-- 4 Not done
+
+-- 5)
+-- SELECT Aluno.Nome FROM Aluno UNION SELECT Prof.Nome FROM Prof;
+-- 6)
+-- SELECT Aluno.Nome From Prova,Aluno Where Prova.cod ='TS1' and Prova.nr = Aluno.nr;
+-- Select Aluno.Nome FROM Prova Natural Join Aluno where Prova.cod= 'TS1';
+-- 7)
+SELECT Aluno.Nome FROM Cadeira,Aluno,Prova
+ Where Aluno.nr = Prova.nr and Cadeira.cod = Prova.cod and Cadeira.curso = 'IS';
+ 
+ 

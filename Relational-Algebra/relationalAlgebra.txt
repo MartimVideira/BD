@@ -1,0 +1,23 @@
+-- 1) π Aluno.nr (Aluno)
+
+-- 2)π Cadeira.cod, Cadeira.design ( σ Cadeira.curso = 'AC' (Cadeira))
+
+-- 3) Several ways
+-- π Nome ( ρ EqualNames (Aluno ⨝ Prof))
+-- π Aluno.Nome (σ Aluno.Nome = Prof.Nome (Aluno ⨯ Prof))
+-- π Aluno.Nome (Aluno) ∩ π Prof.Nome Prof
+
+-- 4)
+--  π Aluno.Nome (Aluno) - π Prof.Nome (Prof)
+ -- π Aluno.Nome (Aluno) - π Aluno.Nome ( Aluno ⨝ Prof)
+
+-- 5
+-- π Aluno.Nome (Aluno) ∪ π Prof.Nome (Prof)
+-- 6)
+ -- π Aluno.Nome (σ Prova.cod = 'TS1' (Prova) ⨝ Aluno)
+-- π Aluno.Nome (σ Prova.cod = 'TS1' ∧ Prova.nr = Aluno.nr  (Prova ⨯ Aluno))
+
+-- 7)σ
+ -- π Aluno.Nome ((σ Cadeira.curso = 'IS' Cadeira ⨝ Prova) ⨝ Aluno)
+ -- π Aluno.Nome (σ Aluno.nr = Prova.nr ((σ Cadeira.curso = 'IS' Cadeira ⨝ Prova) x Aluno))
+ -- π Aluno.Nome (σ Prova.cod = Cadeira.cod ∧ Cadeira.curso = 'IS' ∧ Prova.nr = Aluno.nr (Prova x Aluno x Cadeira))

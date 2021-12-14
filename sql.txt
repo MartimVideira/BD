@@ -173,3 +173,132 @@ PRIMARY KEY (sID, cName, major),
 CHECK (decision=‘N’ or cName <>’Stanford’ or major <>’CS’)
 );
 
+----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+REFERENTIAL INTEGRITY 
+
+Integrity of references
+
+main table represented by R refered table represented by S
+
+Referential integrity from R.A to S.B
+A is called the foreign key
+B is usually required to be the primary key for table S or at least unique
+Multi-attribute foreign keys are allowed
+
+Potentially violating modifications:
+
+Insert into R -> inserting into the table that references the S table  and if the 
+tuple that the insertion refers to doesnt exist in S we have a violation
+
+Delete From S -> if we delete a tuple from S we can be deleting a refered attribute from R
+
+UPdate R.A 
+Update S.B 
+
+the operations that  occur in S may not trigger an error as we can define its behaviour
+ 
+ ------------
+Delete from S 
+ 
+. Restrict (default)
+    generate an error, modification disallowed
+
+.  Set Null 
+    replace R.A by NUll
+
+.   Cascade 
+    do the same update to R.A
+
+Foreign Key Declaration:
+
+create table <S> (
+    <column_nameA> <data_type> PRIMARY KEY,
+    <column_nameB> <data_type> ,
+    ...
+    <column_nameC> <data_type>    
+);
+
+create table <R>(
+    <column_nameX> <data_type> PRIMARY KEY,
+    <column_nameY> <data_type>,
+    ...
+    <column_nameZ> <data_type> REFERENCES <S>(<column_nameA)
+    #collumn z points to column A in S
+)
+
+Example :
+
+CREATE TABLE College (cName text PRIMARY KEY, state text,
+enrollment int);
+CREATE TABLE Student (sID int PRIMARY KEY, sName text, GPA
+real, sizeHS int);
+CREATE TABLE Apply (
+sID REFERENCES Student(sID),
+cName text REFERENCES College(cName),
+major text,
+decision text,
+PRIMARY KEY(sID, cName)
+);
+se o atributo for a chave primaria e for uma chave simples nao precisamos de 
+dizer o atributo que referenciamos
+
+No caso de serem chaves compostas:
+CREATE TABLE <table_A> (
+<column_A> <data_type>,
+<column_B> <data_type>,
+...
+<column_C> <data_type>,
+PRIMARY KEY (<column_A>, <column_B>)
+);
+CREATE TABLE <table_B> (
+<column_X> <data_type> PRIMARY KEY,
+<column_Y> <data_type>,
+...
+<column_Z> <data_type>,
+FOREIGN KEY (<column_X>, <column_Y> ) REFERENCES <table_A>(<column_A>, <column_B>)
+# uma chave estrangeira composta tem que ser declarada assim
+);
+
+ON DELETE AND ON UPDATE ACTIONS
+
+Define actions that take place when deleting or modifying parent key values.
+
+Use the ON DELETE and ON UPDATE  clauses with one of the values:
+.   Restrict : prohibit opreation on a parent key when there are 
+child keys mapped to it.
+.   Set Default: child key columns are set to the default value.
+. Cascade :propagates the operation on the parent key to each 
+dependent child key
+
+
+Exemple:
+CREATE TABLE College (cName text PRIMARY KEY, state text, enrollment int);
+
+CREATE TABLE Student (sID int PRIMARY KEY, sName text, GPA real, sizeHS int);
+
+CREATE TABLE Apply (
+sID REFERENCES Student(ID),
+cName text REFERENCES College (cName) ON DELETE SET NULL ON
+UPDATE CASCADE,
+major text,
+decision text,
+PRIMARY KEY(sID, cName)
+);
+
+Enabling Foreign Key Support in SQLITE
+incluir sempre :
+PRAGMA  foreign_keys = ON;
+
+Constraint Naming
+Naming constraints is optional but is a good practice it makes it esier to 
+identify the constraints when errors occur and to refer to them.
+
+Exemple:
+CREATE TABLE Student (
+sID INTEGER,
+sName TEXT,
+GPA REAL CONSTRAINT GPARange CHECK (GPA<=4.0),
+sizeHS INTEGER CONSTRAINT maxSizeHS CHECK (sizeHS < 5000),
+CONSTRAINT StudentPK PRIMARY KEY (sID)
+);

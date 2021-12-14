@@ -1,0 +1,11 @@
+RelaX is  an online Relation Algebra /SQL compiler
+https://dbis-uibk.github.io/relax/calc/local/uibk/local/0
+
+Guide:
+
+-> Insert the data in the Group Editor 
+-> Hit Visualize
+-> Hit Use in group Editor
+
+
+Then you can perfor RA and Sql on the inserted data
