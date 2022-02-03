@@ -1,8 +1,0 @@
-Sql commands end in ;
-
-.schema <table_name> # prints the command that created the table
-.tables # trints the tables
-.<table_name> #prints the table
-.header on
-.mode column 
-# this two commands result in a pretty print

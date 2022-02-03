@@ -10,6 +10,9 @@ Data Manipulation language (Dml)
   - Insert delete modify tuples in tables
   - Query one or more tables
 
+SQL is a rich programming language that handles the
+way data is processed declaratively.
+
 ## Relations in SQL 
 - **Tables**: normal type of realtion exists in the database and can be modified as well as queried
 
@@ -172,6 +175,7 @@ UNIQUE (name, address)
 
 ## CHECK PER COLLUMN
 
+Checked whenever we insert or update a tuple q 
 >collumn_name collumn_type CHECK(condition)
 
 ```sql
@@ -279,6 +283,16 @@ CREATE TABLE <table_B> (
 FOREIGN KEY (<column_X>, <column_Y> ) REFERENCES <table_A>(<column_A>, <column_B>)
 # uma chave estrangeira composta tem que ser declarada assim
 );
+
+CREATE TABLE Apply (
+sID REFERENCES Student,
+collegeName text,
+collegeState text,
+major text,
+decision text,
+FOREIGN KEY (collegeName, collegeState) REFERENCES College(cName, state),
+PRIMARY KEY(sID, collegeName, collegeState)
+);
 ```
 
 ## ON DELETE AND ON UPDATE ACTIONS
@@ -325,3 +339,20 @@ sizeHS INTEGER CONSTRAINT maxSizeHS CHECK (sizeHS < 5000),
 CONSTRAINT StudentPK PRIMARY KEY (sID)
 );
 ```
+
+
+## ROWID in SQLite
+
+If a table is created without specifying the WITHOUT ROWID
+option, SQLite adds an implicit column called rowid that stores 64-
+bit signed integer
+
+The rowid is a key that uniquely identifies the row in its table
+Can be accessed using ROWID, _ROWID_, or OID (except if ordinary
+columns use these names)
+
+On an INSERT, if the ROWID is not explicitly given a value, then it
+will be filled automatically with an unused integer greater than 0,
+usually one more than the largest ROWID currently in use.
+
+ROWID > AUTOINCREMENT is faster

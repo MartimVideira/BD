@@ -19,3 +19,15 @@ To get all the values
 select sid , sName , GPA from Student 
 Where GPA > 3.5 OR GPA <=3.5 or GPA is null
 ```
+
+
+When counting (the distinct)
+values, NULLs are not included
+
+
+## Summary
+
+When using a database with NULL values:
+- Be careful when writing queries
+- Understand how the NULL values are going to influence the
+result
